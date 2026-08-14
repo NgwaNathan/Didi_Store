@@ -23,8 +23,20 @@ const display = Plus_Jakarta_Sans({
   display: "swap",
 });
 
+/**
+ * Absolute base for Open Graph URLs — this is what WhatsApp and Facebook resolve
+ * link previews against, so a placeholder here breaks every shared product link.
+ * Vercel supplies the production domain at build time; NEXT_PUBLIC_SITE_URL
+ * overrides it once a custom domain is pointed at the project.
+ */
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000");
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://didistore.example"),
+  metadataBase: new URL(siteUrl),
   title: {
     default: `${store.name} — ${store.tagline}`,
     template: `%s · ${store.name}`,
