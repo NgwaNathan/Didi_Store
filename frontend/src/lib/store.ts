@@ -9,8 +9,8 @@ export const store = {
   description:
     "Premium cameras, electronics, home appliances and fitness gear — browse the catalogue and order in a WhatsApp message.",
   /** International format, digits only, as required by wa.me links. */
-  whatsappNumber: "237600000000",
-  whatsappDisplay: "+237 6 00 00 00 00",
+  whatsappNumber: "237680952307",
+  whatsappDisplay: "+237680952307",
   email: "hello@didistore.cm",
   city: "Douala, Cameroon",
   socials: {
@@ -26,14 +26,26 @@ export function whatsappLink(message?: string): string {
   return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }
 
-export function productOrderLink(product: Product, locale: Locale = "en"): string {
+export function productOrderLink(
+  product: Product,
+  locale: Locale = "en",
+): string {
   return whatsappLink(
-    dictionaries[locale].whatsapp.orderMessage(product.name, product.sku, formatPrice(product.price, locale)),
+    dictionaries[locale].whatsapp.orderMessage(
+      product.name,
+      product.sku,
+      formatPrice(product.price, locale),
+    ),
   );
 }
 
-export function productEnquiryLink(product: Product, locale: Locale = "en"): string {
-  return whatsappLink(dictionaries[locale].whatsapp.enquiryMessage(product.name, product.sku));
+export function productEnquiryLink(
+  product: Product,
+  locale: Locale = "en",
+): string {
+  return whatsappLink(
+    dictionaries[locale].whatsapp.enquiryMessage(product.name, product.sku),
+  );
 }
 
 export function generalOrderLink(locale: Locale = "en"): string {
